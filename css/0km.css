@@ -1,0 +1,227 @@
+/* --- 0KM Specific Styles --- */
+.hero-0km {
+    position: relative;
+    height: 50vh;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+.hero-0km-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/hero.png') no-repeat center center/cover;
+    filter: brightness(0.4) grayscale(0.5);
+    z-index: 1;
+}
+
+.hero-0km-content {
+    position: relative;
+    z-index: 2;
+    padding: 2rem;
+}
+
+/* Brand Grid */
+.brands-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.brand-card-complex {
+    background-color: #0f0f0f;
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    transition: transform 0.2s var(--easing), border-color 0.2s var(--easing), box-shadow 0.2s var(--easing);
+    overflow: hidden;
+}
+
+.brand-card-complex:hover {
+    transition-duration: 0.3s;
+    transition-delay: 0s !important;
+    border-color: #fff;
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+}
+
+.card-complex-top {
+    position: relative;
+    padding: 3rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #141414 0%, #050505 100%);
+    min-height: 220px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.card-complex-bg-logo {
+    max-width: 150px;
+    max-height: 150px;
+    object-fit: contain;
+    opacity: 0.25;
+    transition: transform 0.3s var(--easing), opacity 0.3s var(--easing);
+}
+
+.brand-card-complex:hover .card-complex-bg-logo {
+    transition-delay: 0s !important;
+    opacity: 0.45;
+    transform: scale(1.1);
+}
+
+.card-complex-name-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-white);
+    font-size: 1.8rem;
+    font-weight: 800;
+    text-align: center;
+    width: 100%;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+.card-complex-bottom {
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #111111;
+    flex-grow: 1;
+}
+
+.card-complex-title {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.card-complex-models {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-complex-btn {
+    background-color: var(--text-white);
+    color: var(--bg-black);
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.brand-card-complex:hover .card-complex-btn {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+/* Specific Model Cards layout if needed adjustments */
+.model-0km-card {
+    display: flex;
+    flex-direction: column;
+    border-top: 3px solid transparent;
+    /* Budget for the accent line */
+    transition: all 0.3s var(--easing);
+}
+
+.brand-accent-line {
+    height: 4px;
+    width: 0;
+    transition: width 0.6s var(--easing);
+}
+
+.model-0km-card:hover .brand-accent-line {
+    width: 60px;
+}
+
+.model-0km-card .card-info {
+    padding-bottom: 2rem;
+}
+
+/* ── Skeleton Loader (0KM) ───────────────────────────── */
+@keyframes skeleton-pulse {
+    0% {
+        background-position: -400px 0;
+    }
+
+    100% {
+        background-position: 400px 0;
+    }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+    background-size: 800px 100%;
+    animation: skeleton-pulse 1.4s ease infinite;
+    border-radius: 6px;
+}
+
+.skeleton-card {
+    pointer-events: none;
+}
+
+.skeleton-img {
+    width: 100%;
+    height: 220px;
+    border-radius: 12px 12px 0 0;
+}
+
+.skeleton-line {
+    display: block;
+    border-radius: 4px;
+}
+
+/* ── Error / Empty State (0KM) ───────────────────────── */
+.airtable-error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(220, 50, 50, 0.25);
+    border-radius: 12px;
+    background: rgba(220, 50, 50, 0.05);
+    gap: 0.8rem;
+}
+
+.airtable-error-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.airtable-error h3 {
+    color: var(--text-white);
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.airtable-error p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.airtable-error .btn {
+    margin-top: 0.8rem;
+}

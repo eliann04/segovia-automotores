@@ -1,0 +1,265 @@
+/* --- CSS Variables Specific to Details Page --- */
+.detalle-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+    .detalle-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+}
+
+.detalle-gallery {
+    min-width: 0; /* Previene que la galería rompa el layout responsivo del grid */
+}
+
+.breadcrumb {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 1.5rem;
+}
+.breadcrumb a {
+    transition: color 0.3s ease;
+}
+.breadcrumb a:hover {
+    color: var(--text-white);
+}
+.breadcrumb .separator {
+    margin: 0 0.5rem;
+}
+
+/* --- Gallery & Carousel --- */
+.main-image-container {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #0a0a0a;
+    height: 540px;           /* altura fija — ideal para fotos verticales */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border-gray);
+}
+
+.main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;     /* no recorta — muestra la foto completa */
+    object-position: center;
+    cursor: zoom-in;
+}
+
+/* --- Lightbox --- */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.95);
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.lightbox.active {
+    display: flex;
+}
+.lightbox-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+.lightbox-content.zoomed {
+    transform: scale(2);
+    cursor: zoom-out;
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+    line-height: 1;
+}
+.lightbox-close:hover {
+    color: #ccc;
+}
+
+@media (max-width: 768px) {
+    .main-image-container {
+        height: 380px;
+    }
+}
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    border: 1px solid var(--border-gray);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.nav-arrow:hover {
+    background: white;
+    color: black;
+}
+
+.prev-arrow { left: 1rem; }
+.next-arrow { right: 1rem; }
+
+.image-counter {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    border: 1px solid var(--border-gray);
+}
+
+.thumbnail-row {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-hover) transparent;
+}
+
+.thumbnail-row::-webkit-scrollbar {
+    height: 6px;
+}
+.thumbnail-row::-webkit-scrollbar-thumb {
+    background-color: var(--border-hover);
+    border-radius: 10px;
+}
+
+.thumb-wrapper {
+    flex: 0 0 calc(25% - 0.75rem);
+    aspect-ratio: 1;         /* cuadrado — funciona para vertical y horizontal */
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    background-color: #0a0a0a;
+    position: relative;
+    min-width: 80px;
+    max-width: 120px;
+}
+
+.thumb-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;     /* igual que la principal, sin recorte */
+    object-position: center;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.thumb-wrapper.active {
+    border-color: var(--text-white);
+}
+
+.thumb-wrapper.active img, .thumb-wrapper:hover img {
+    opacity: 1;
+}
+
+/* Overlay styles eliminated since we show scrolling thumbnails */
+
+.description-section {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-gray);
+    padding-top: 2rem;
+}
+.description-section h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* --- Info Card --- */
+.info-card {
+    background-color: var(--card-charcoal);
+    border: 1px solid var(--border-gray);
+    border-radius: 12px;
+    padding: 2rem;
+    position: sticky;
+    top: 100px;
+}
+
+.car-title {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
+}
+
+.car-subtitle {
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.specs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.spec-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.spec-label {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.spec-value {
+    color: var(--text-white);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.btn .icon {
+    margin-right: 0.5rem;
+}

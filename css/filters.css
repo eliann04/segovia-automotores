@@ -1,0 +1,172 @@
+/* --- Catalog Specific Styles --- */
+.internal-header {
+    padding-top: 150px;
+    padding-bottom: 3rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-gray);
+}
+
+.filters-section {
+    background-color: var(--card-charcoal);
+    border-bottom: 1px solid var(--border-gray);
+    padding: 2rem 0;
+}
+
+.filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: flex-end;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 200px;
+}
+
+.filter-group label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.filter-select,
+.filter-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--bg-black);
+    border: 1px solid var(--border-gray);
+    color: var(--text-white);
+    border-radius: 4px;
+    font-family: var(--font-inter);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    border-color: var(--text-white);
+}
+
+.filter-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+    flex: 0 0 auto;
+}
+
+.page-vehiculos .nav-links a.active {
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.no-results {
+    text-align: center;
+    padding: 4rem 0;
+}
+
+.price-tag {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-white);
+}
+
+.card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+/* ── Skeleton Loader ─────────────────────────────────── */
+@keyframes skeleton-pulse {
+    0%   { background-position: -400px 0; }
+    100% { background-position: 400px  0; }
+}
+
+.skeleton {
+    background: linear-gradient(90deg, #1a1a1a 25%, #252525 50%, #1a1a1a 75%);
+    background-size: 800px 100%;
+    animation: skeleton-pulse 1.4s ease infinite;
+    border-radius: 6px;
+}
+
+.skeleton-card {
+    pointer-events: none;
+}
+
+.skeleton-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    border-radius: 8px 8px 0 0;
+}
+
+.skeleton-line {
+    display: block;
+    border-radius: 4px;
+}
+
+/* ── Error State ────────────────────────────────────── */
+.airtable-error {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px solid rgba(220, 50, 50, 0.25);
+    border-radius: 12px;
+    background: rgba(220, 50, 50, 0.05);
+    gap: 0.8rem;
+}
+
+.airtable-error-icon {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.airtable-error h3 {
+    color: var(--text-white);
+    font-size: 1.3rem;
+    margin: 0;
+}
+
+.airtable-error p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin: 0;
+    line-height: 1.6;
+}
+
+.airtable-error .btn {
+    margin-top: 0.8rem;
+}
+
+/* ── Botón Ver Detalles  ────────────────────────────── */
+.btn-ver-detalles {
+    display: block;
+    margin-top: 1.2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+}
+
+/* ── Responsive grilla de catalog ───────────────────── */
+.catalog-grid {
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+}
+
+@media (max-width: 640px) {
+    .catalog-grid {
+        grid-template-columns: 1fr;
+    }
+}
+

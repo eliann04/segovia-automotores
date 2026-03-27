@@ -1,0 +1,11 @@
+# Archivos sensibles
+.env
+.env.local
+.env.*.local
+
+# Node (por si acaso)
+node_modules/
+
+# Sistema
+.DS_Store
+Thumbs.db

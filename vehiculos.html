@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventario - Segovia Automotores</title>
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/filters.css">
+</head>
+
+<body class="page-vehiculos">
+
+    <!-- Sticky Header -->
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html"><img src="img/logo.png" alt="Segovia Automotores Logo" class="nav-logo-img"></a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Inicio</a>
+                <a href="vehiculos.html" class="active">Usados</a>
+                <a href="0km.html">0km</a>
+                <a href="empresa.html">Nosotros</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Header Interno -->
+    <section class="internal-header fade-up"
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('img/header-bg.jpg'); background-size: cover; background-position: center 55%; border-bottom: 1px solid var(--border-gray); padding-top: 120px; min-height: 350px; display: flex; align-items: center;">
+        <div class="container"
+            style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+            <div class="location-badge" style="margin-bottom: 1rem;">Usados</div>
+            <h1 class="large-text" style="margin-bottom: 0;">Encontrá el vehículo ideal para vos</h1>
+        </div>
+    </section>
+
+    <!-- Filters Section -->
+    <section class="filters-section fade-up">
+        <div class="container">
+            <div class="filters-bar">
+                <div class="filter-group">
+                    <label for="filterMake">Marca</label>
+                    <select id="filterMake" class="filter-select">
+                        <option value="all">Todas las marcas</option>
+                        <!-- Opciones generadas por JS -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterYear">Año</label>
+                    <select id="filterYear" class="filter-select">
+                        <option value="all">Todos los años</option>
+                        <!-- Opciones generadas por JS -->
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filterMaxPrice">Precio Máximo (USD)</label>
+                    <input type="number" id="filterMaxPrice" class="filter-input" placeholder="Ej: 50000">
+                </div>
+                <div class="filter-group filter-actions">
+                    <button id="btnApplyFilters" class="btn btn-solid">Filtrar</button>
+                    <button id="btnResetFilters" class="btn btn-outline" style="padding: 1rem;">Limpiar</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catalog Section -->
+    <section id="stock" class="catalog section-padding" style="padding-top: 2rem;">
+        <div class="container">
+            <div id="noResultsMsg" class="no-results" style="display: none;">
+                <p class="large-text">No se encontraron vehículos que coincidan con tu búsqueda.</p>
+            </div>
+            <div class="catalog-grid" id="catalogGrid">
+                <!-- Cars will be injected here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <!-- Footer -->
+    <footer class="footer section-padding">
+        <div class="container fade-up">
+            <div class="footer-grid">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <img src="img/logo.png" alt="Segovia Automotores" class="footer-logo-img">
+                    <p>Compra y Venta de Autos: Vehículos seleccionados, atención personalizada.</p>
+                    <div class="social-circles">
+                        <a href="https://www.instagram.com/segoviaautomotores_/" target="_blank"
+                            aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg></a>
+                        <a href="https://facebook.com" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                            </svg></a>
+                        <a href="https://wa.me/5492235409018" target="_blank" aria-label="WhatsApp"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                </path>
+                            </svg></a>
+                    </div>
+                </div>
+
+                <!-- Navigation Column -->
+                <div class="footer-nav">
+                    <h3>Navegación</h3>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="vehiculos.html">Usados</a></li>
+                        <li><a href="0km.html">0km</a></li>
+                        <li><a href="empresa.html">Nosotros</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-contact">
+                    <h3>Contacto</h3>
+                    <ul>
+                        <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                    <circle cx="12" cy="10" r="3"></circle>
+                                </svg></span> Gascón 3286, Mar del Plata</li>
+                        <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg></span> 2235409018</li>
+                        <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z">
+                                    </path>
+                                </svg></span> 2235422086</li>
+                        <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                </svg></span> @segoviaautomotores_</li>
+                        <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                    stroke-linecap="round" stroke-linejoin="round">
+                                    <path
+                                        d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                    </path>
+                                    <polyline points="22,6 12,13 2,6"></polyline>
+                                </svg></span> segoviaautomotores@gmail.com</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/airtable.js"></script>
+    <script src="js/catalog.js"></script>
+</body>
+
+</html>
