@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Estado ---
     let allVehicles  = [];
-    let currentSort  = 'default';
+    let currentSort  = 'name-asc';
 
     // ─── Helpers ─────────────────────────────────────────────
     const formatPrice = price =>
@@ -48,8 +48,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 break;
             case 'year-asc':
                 sorted.sort((a, b) => (a.año || 0) - (b.año || 0));
-                break;
-            default:
                 break;
         }
         return sorted;
@@ -178,9 +176,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (filterYear)     filterYear.value  = 'all';
         if (filterMaxPrice) filterMaxPrice.value = '';
         // Reset sort
-        currentSort = 'default';
-        sortBtns.forEach(b => b.classList.toggle('active', b.dataset.sort === 'default'));
-        renderCars(allVehicles);
+        currentSort = 'name-asc';
+        sortBtns.forEach(b => b.classList.toggle('active', b.dataset.sort === 'name-asc'));
+        renderCars(getSortedCars(allVehicles));
     }
 
     // ─── Event listeners de filtros ───────────────────────────
@@ -210,6 +208,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     } catch {
         showError();
     }
+
+    // ─── Collapsible panels ──────────────────────────────
+    document.getElementById('toggleFilters')?.addEventListener('click', () => {
+        document.getElementById('panelFilters')?.classList.toggle('collapsed');
+    });
+    document.getElementById('toggleSort')?.addEventListener('click', () => {
+        document.getElementById('panelSort')?.classList.toggle('collapsed');
+    });
 
     // ─── Navbar scroll effect ─────────────────────────────────
     const navbar = document.querySelector('.navbar');

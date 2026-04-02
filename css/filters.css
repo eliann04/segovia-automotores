@@ -40,6 +40,32 @@
     padding: 0.85rem 1.25rem;
     border-bottom: 1px solid var(--border-gray);
     background-color: rgba(255,255,255,0.03);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.2s ease;
+}
+
+.panel-header:hover {
+    background-color: rgba(255,255,255,0.06);
+}
+
+/* Collapsed state: hide the border-bottom on header when body is hidden */
+.panel-card.collapsed .panel-header {
+    border-bottom-color: transparent;
+}
+
+.panel-chevron {
+    margin-left: auto;
+    width: 16px !important;
+    height: 16px !important;
+    color: var(--text-muted) !important;
+    flex-shrink: 0;
+    transition: transform 0.3s var(--easing);
+}
+
+/* Rotate chevron when expanded */
+.panel-card:not(.collapsed) .panel-chevron {
+    transform: rotate(180deg);
 }
 
 .panel-header svg {
@@ -64,16 +90,28 @@
 }
 
 .panel-body {
-    padding: 1.25rem;
+    padding: 0 1.25rem;
+    max-height: 0;
+    overflow: hidden;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-end;
     gap: 1rem;
+    transition: max-height 0.35s var(--easing), padding 0.35s var(--easing);
+}
+
+.panel-card:not(.collapsed) .panel-body {
+    max-height: 200px;
+    padding: 1.25rem;
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
+    flex: 1 1 160px;
+    min-width: 140px;
 }
 
 .filter-group label {
@@ -116,7 +154,8 @@
 .filter-actions-row {
     display: flex;
     gap: 0.75rem;
-    margin-top: 0.25rem;
+    flex: 0 0 auto;
+    align-items: flex-end;
 }
 
 .btn-filter {
@@ -134,10 +173,18 @@
 }
 
 .sort-buttons {
-    padding: 1rem;
+    padding: 0 1rem;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s var(--easing), padding 0.35s var(--easing);
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
+}
+
+.panel-card:not(.collapsed) .sort-buttons {
+    max-height: 400px;
+    padding: 1rem;
 }
 
 .sort-btn {
