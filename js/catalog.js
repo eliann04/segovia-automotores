@@ -14,14 +14,46 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     if (!catalogGrid) return;
 
+    // --- Sort buttons ---
+    const sortBtns = document.querySelectorAll('.sort-btn');
+
     // --- Estado ---
-    let allVehicles = [];
+    let allVehicles  = [];
+    let currentSort  = 'default';
 
     // ─── Helpers ─────────────────────────────────────────────
     const formatPrice = price =>
         new Intl.NumberFormat('en-US', {
             style: 'currency', currency: 'USD', maximumFractionDigits: 0
         }).format(price);
+
+    // ─── Sort ─────────────────────────────────────────────────
+    function getSortedCars(cars) {
+        const sorted = [...cars];
+        switch (currentSort) {
+            case 'name-asc':
+                sorted.sort((a, b) => (a.nombre || `${a.marca} ${a.año}`).localeCompare(b.nombre || `${b.marca} ${b.año}`));
+                break;
+            case 'name-desc':
+                sorted.sort((a, b) => (b.nombre || `${b.marca} ${b.año}`).localeCompare(a.nombre || `${a.marca} ${a.año}`));
+                break;
+            case 'price-desc':
+                sorted.sort((a, b) => (b.precio || 0) - (a.precio || 0));
+                break;
+            case 'price-asc':
+                sorted.sort((a, b) => (a.precio || 0) - (b.precio || 0));
+                break;
+            case 'year-desc':
+                sorted.sort((a, b) => (b.año || 0) - (a.año || 0));
+                break;
+            case 'year-asc':
+                sorted.sort((a, b) => (a.año || 0) - (b.año || 0));
+                break;
+            default:
+                break;
+        }
+        return sorted;
+    }
 
     // ─── Skeleton loading ────────────────────────────────────
     function showSkeleton(n = 6) {
@@ -138,19 +170,33 @@ document.addEventListener('DOMContentLoaded', async () => {
             return okMake && okYear && okPrice;
         });
 
-        renderCars(filtered);
+        renderCars(getSortedCars(filtered));
     }
 
     function resetFilters() {
         if (filterMake)     filterMake.value  = 'all';
         if (filterYear)     filterYear.value  = 'all';
         if (filterMaxPrice) filterMaxPrice.value = '';
+        // Reset sort
+        currentSort = 'default';
+        sortBtns.forEach(b => b.classList.toggle('active', b.dataset.sort === 'default'));
         renderCars(allVehicles);
     }
 
     // ─── Event listeners de filtros ───────────────────────────
     btnApply?.addEventListener('click',  applyFilters);
     btnReset?.addEventListener('click',  resetFilters);
+
+    // ─── Event listeners de ordenamiento ─────────────────────
+    sortBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentSort = btn.dataset.sort;
+            sortBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            // Re-apply filters with the new sort
+            applyFilters();
+        });
+    });
 
     // ─── Cargar datos desde Airtable ──────────────────────────
     showSkeleton();

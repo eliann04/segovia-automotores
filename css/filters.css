@@ -1,4 +1,5 @@
 /* --- Catalog Specific Styles --- */
+
 .internal-header {
     padding-top: 150px;
     padding-bottom: 3rem;
@@ -6,44 +7,105 @@
     border-bottom: 1px solid var(--border-gray);
 }
 
+/* ── Filters + Sort two-panel wrapper ─────────────────── */
 .filters-section {
-    background-color: var(--card-charcoal);
+    background-color: #080808;
     border-bottom: 1px solid var(--border-gray);
     padding: 2rem 0;
 }
 
-.filters-bar {
+.filters-sort-wrapper {
     display: flex;
-    flex-wrap: wrap;
     gap: 1.5rem;
-    align-items: flex-end;
+    align-items: flex-start;
+}
+
+/* ── Panel card (shared between filters & sort) ────────── */
+.panel-card {
+    background-color: var(--card-charcoal);
+    border: 1px solid var(--border-gray);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: border-color 0.3s var(--easing);
+}
+
+.panel-card:hover {
+    border-color: var(--border-hover);
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.85rem 1.25rem;
+    border-bottom: 1px solid var(--border-gray);
+    background-color: rgba(255,255,255,0.03);
+}
+
+.panel-header svg {
+    width: 16px;
+    height: 16px;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.panel-header span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+}
+
+/* ── Filters panel (left) ──────────────────────────────── */
+.panel-filters {
+    flex: 1 1 380px;
+    min-width: 280px;
+}
+
+.panel-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .filter-group {
     display: flex;
     flex-direction: column;
-    flex: 1;
-    min-width: 200px;
+    gap: 0.4rem;
 }
 
 .filter-group label {
-    font-size: 0.85rem;
+    font-size: 0.78rem;
     color: var(--text-muted);
-    margin-bottom: 0.5rem;
     font-weight: 500;
+    letter-spacing: 0.03em;
 }
 
 .filter-select,
 .filter-input {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.65rem 0.9rem;
     background-color: var(--bg-black);
     border: 1px solid var(--border-gray);
     color: var(--text-white);
-    border-radius: 4px;
+    border-radius: 6px;
     font-family: var(--font-inter);
+    font-size: 0.9rem;
     outline: none;
-    transition: border-color 0.3s ease;
+    transition: border-color 0.25s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23999' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+}
+
+.filter-input {
+    background-image: none;
+    padding-right: 0.9rem;
 }
 
 .filter-select:focus,
@@ -51,13 +113,98 @@
     border-color: var(--text-white);
 }
 
-.filter-actions {
-    flex-direction: row;
-    align-items: center;
-    gap: 1rem;
-    flex: 0 0 auto;
+.filter-actions-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
 }
 
+.btn-filter {
+    flex: 1;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    border-radius: 6px;
+}
+
+/* ── Sort panel (right) ────────────────────────────────── */
+.panel-sort {
+    flex: 0 1 auto;
+    min-width: 220px;
+}
+
+.sort-buttons {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+}
+
+.sort-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    width: 100%;
+    padding: 0.55rem 0.9rem;
+    background-color: transparent;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    color: var(--text-muted);
+    font-family: var(--font-inter);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.sort-btn:hover {
+    background-color: rgba(255,255,255,0.05);
+    color: var(--text-white);
+    border-color: var(--border-gray);
+}
+
+.sort-btn.active {
+    background-color: rgba(255,255,255,0.1);
+    border-color: var(--border-hover);
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.sort-icon {
+    font-size: 0.75rem;
+    font-weight: 700;
+    min-width: 28px;
+    text-align: center;
+    background-color: rgba(255,255,255,0.07);
+    border-radius: 4px;
+    padding: 0.15rem 0.35rem;
+    letter-spacing: 0;
+    line-height: 1.4;
+}
+
+.sort-btn.active .sort-icon {
+    background-color: rgba(255,255,255,0.18);
+}
+
+/* ── Responsive: stack panels on mobile ─────────────────── */
+@media (max-width: 768px) {
+    .filters-sort-wrapper {
+        flex-direction: column;
+    }
+    .panel-filters,
+    .panel-sort {
+        width: 100%;
+        min-width: unset;
+        flex: none;
+    }
+    .sort-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ── Legacy classes kept for compatibility ──────────────── */
 .page-vehiculos .nav-links a.active {
     color: var(--text-white);
     font-weight: 600;
@@ -169,4 +316,3 @@
         grid-template-columns: 1fr;
     }
 }
-
