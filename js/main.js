@@ -1,5 +1,39 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- Mobile Hamburger Menu ---
+    const hamburger = document.getElementById('navHamburger');
+    const drawer    = document.getElementById('navDrawer');
+    const overlay   = document.getElementById('navOverlay');
+
+    function openMenu() {
+        hamburger && hamburger.classList.add('open');
+        drawer    && drawer.classList.add('open');
+        overlay   && overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMenu() {
+        hamburger && hamburger.classList.remove('open');
+        drawer    && drawer.classList.remove('open');
+        overlay   && overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.contains('open') ? closeMenu() : openMenu();
+        });
+    }
+
+    if (overlay) overlay.addEventListener('click', closeMenu);
+
+    // Close drawer when a link inside it is clicked
+    if (drawer) {
+        drawer.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+    }
+
+
+
     // Render dynamic inventory
     const catalogGrid = document.getElementById('catalogGrid');
     if (catalogGrid && typeof CAR_INVENTORY !== 'undefined') {
