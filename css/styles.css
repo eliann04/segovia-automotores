@@ -1332,15 +1332,14 @@ h4 {
 
     /* ---- Carrusel deslizable con el dedo ---- */
     .home-carousel-container {
-        touch-action: pan-x;                /* el gesto horizontal es para el carrusel */
         -webkit-overflow-scrolling: touch;  /* inercia en iOS */
-        scroll-snap-type: x mandatory;      /* snapping suave entre tarjetas */
+        scroll-snap-type: x proximity;      /* snapping suave, sin forzar */
         padding-bottom: 0.5rem;
     }
 
     .home-car-card {
-        scroll-snap-align: start;           /* cada tarjeta se alinea al deslizar */
-        min-width: 80vw;                    /* tarjetas un poco más anchas para mejor lectura */
+        scroll-snap-align: start;
+        min-width: 75vw;                    /* se ve parte de la siguiente tarjeta */
     }
 }
 
