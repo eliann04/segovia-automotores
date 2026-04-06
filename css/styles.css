@@ -1329,6 +1329,19 @@ h4 {
         /* Move text to center with the box vertically in mobile */
         transform: translate(-50%, -50%);
     }
+
+    /* ---- Carrusel deslizable con el dedo ---- */
+    .home-carousel-container {
+        touch-action: pan-x;                /* el gesto horizontal es para el carrusel */
+        -webkit-overflow-scrolling: touch;  /* inercia en iOS */
+        scroll-snap-type: x mandatory;      /* snapping suave entre tarjetas */
+        padding-bottom: 0.5rem;
+    }
+
+    .home-car-card {
+        scroll-snap-align: start;           /* cada tarjeta se alinea al deslizar */
+        min-width: 80vw;                    /* tarjetas un poco más anchas para mejor lectura */
+    }
 }
 
 /* --- Mobile Hamburger Menu --- */
