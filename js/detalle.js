@@ -1,19 +1,19 @@
-// =============================================================
-//  detalle.js — Detalle de vehículo  |  Fuente: Airtable
+﻿// =============================================================
+//  detalle.js â€” Detalle de vehÃ­culo  |  Fuente: Airtable
 // =============================================================
 document.addEventListener('DOMContentLoaded', async () => {
 
     const urlParams = new URLSearchParams(window.location.search);
     const carId     = urlParams.get('id');
 
-    if (!carId) { window.location.href = 'vehiculos.html'; return; }
+    if (!carId) { window.location.href = ''; return; }
 
     const formatPrice = price =>
         new Intl.NumberFormat('en-US', {
             style: 'currency', currency: 'USD', maximumFractionDigits: 0
         }).format(price);
 
-    // ─── Mostrar loading placeholder ──────────────────────────
+    // â”€â”€â”€ Mostrar loading placeholder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const mainContainer = document.querySelector('.detalle-main .container');
     document.getElementById('car-title').textContent        = 'Cargando...';
     document.getElementById('mobile-car-title').textContent = 'Cargando...';
@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     try {
         const vehicles = await fetchAirtableVehicles();
-        // Buscar por Airtable record ID (parámetro ?id=recXXXX)
+        // Buscar por Airtable record ID (parÃ¡metro ?id=recXXXX)
         car = vehicles.find(v => v.id === carId);
     } catch {
         mainContainer.innerHTML = `
             <div class="airtable-error" style="margin-top:6rem;">
-                <div class="airtable-error-icon">⚠️</div>
-                <h3>No se pudo cargar el vehículo</h3>
+                <div class="airtable-error-icon">âš ï¸</div>
+                <h3>No se pudo cargar el vehÃ­culo</h3>
                 <p>Hubo un problema al conectar con nuestra base de datos.</p>
-                <a href="vehiculos.html" class="btn btn-outline">Volver al catálogo</a>
+                <a href="vehiculos" class="btn btn-outline">Volver al catÃ¡logo</a>
             </div>`;
         return;
     }
@@ -38,36 +38,36 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!car) {
         mainContainer.innerHTML = `
             <div class="no-results" style="text-align:center;padding:4rem 0;margin-top:4rem;">
-                <h1 class="massive-title" style="font-size:3rem;">Vehículo no encontrado</h1>
-                <a href="vehiculos.html" class="btn btn-solid" style="margin-top:2rem;">Volver al catálogo</a>
+                <h1 class="massive-title" style="font-size:3rem;">VehÃ­culo no encontrado</h1>
+                <a href="vehiculos" class="btn btn-solid" style="margin-top:2rem;">Volver al catÃ¡logo</a>
             </div>`;
         return;
     }
 
-    // ─── Datos normalizados ───────────────────────────────────
-    const nombre   = car.nombre   || `${car.marca} ${car.año || ''}`.trim();
-    const subtitle = [car.marca, car.año].filter(Boolean).join(' · ');
+    // â”€â”€â”€ Datos normalizados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    const nombre   = car.nombre   || `${car.marca} ${car.aÃ±o || ''}`.trim();
+    const subtitle = [car.marca, car.aÃ±o].filter(Boolean).join(' Â· ');
     const images   = car.fotos.length ? car.fotos : ['img/catalog1.png'];
 
-    // ─── Poblar DOM ───────────────────────────────────────────
+    // â”€â”€â”€ Poblar DOM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     document.title = `${nombre} - Segovia Automotores`;
-    document.getElementById('bc-bodytype').textContent = car.marca || 'Vehículo';
+    document.getElementById('bc-bodytype').textContent = car.marca || 'VehÃ­culo';
 
     document.getElementById('car-title').textContent        = nombre;
     document.getElementById('mobile-car-title').textContent = nombre;
     document.getElementById('mobile-car-title').style.display = 'block';
     document.getElementById('car-subtitle').innerHTML       = subtitle;
 
-    document.getElementById('spec-km').textContent    = car.kilometraje  || '—';
-    document.getElementById('spec-motor').textContent = car.motor        || '—';
-    document.getElementById('spec-year').textContent  = car.año          || '—';
-    document.getElementById('spec-trans').textContent = car.transmision  || '—';
-    document.getElementById('spec-fuel').textContent  = car.combustible  || '—';
-    document.getElementById('spec-doors').textContent = car.puertas      || '—';
+    document.getElementById('spec-km').textContent    = car.kilometraje  || 'â€”';
+    document.getElementById('spec-motor').textContent = car.motor        || 'â€”';
+    document.getElementById('spec-year').textContent  = car.aÃ±o          || 'â€”';
+    document.getElementById('spec-trans').textContent = car.transmision  || 'â€”';
+    document.getElementById('spec-fuel').textContent  = car.combustible  || 'â€”';
+    document.getElementById('spec-doors').textContent = car.puertas      || 'â€”';
 
-    document.getElementById('car-description').textContent = car.descripcion || 'Sin descripción disponible.';
+    document.getElementById('car-description').textContent = car.descripcion || 'Sin descripciÃ³n disponible.';
 
-    // ─── Carrusel de fotos ────────────────────────────────────
+    // â”€â”€â”€ Carrusel de fotos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     let currentIdx   = 0;
     const mainImg    = document.getElementById('main-image');
     const counter    = document.getElementById('image-counter');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     updateGallery();
 
-    // ─── Lightbox para Zoom ───────────────────────────────────
+    // â”€â”€â”€ Lightbox para Zoom â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const lightbox = document.createElement('div');
     lightbox.className = 'lightbox';
     lightbox.innerHTML = `
@@ -186,12 +186,12 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // ─── Botones de acción ────────────────────────────────────
+    // â”€â”€â”€ Botones de acciÃ³n â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     document.getElementById('btn-consultar').addEventListener('click', e => {
         e.preventDefault();
         const precioText = car.precio ? formatPrice(car.precio) : 'a consultar';
         const msg = encodeURIComponent(
-            `Hola! Me interesa el ${nombre}${car.año ? ` (${car.año})` : ''}. Precio publicado: ${precioText}. ¿Podría darme más información?`
+            `Hola! Me interesa el ${nombre}${car.aÃ±o ? ` (${car.aÃ±o})` : ''}. Precio publicado: ${precioText}. Â¿PodrÃ­a darme mÃ¡s informaciÃ³n?`
         );
         window.open(`https://wa.me/5492235409018?text=${msg}`, '_blank');
     });
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    // ─── Navbar scroll ────────────────────────────────────────
+    // â”€â”€â”€ Navbar scroll â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
         if (!navbar) return;
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         navbar.style.borderBottom = window.scrollY > 50 ? '1px solid var(--border-hover)' : '1px solid var(--border-gray)';
     });
 
-    // ─── Fade-up observer ─────────────────────────────────────
+    // â”€â”€â”€ Fade-up observer â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) { entry.target.classList.add('visible'); obs.unobserve(entry.target); }
@@ -220,3 +220,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     }, { threshold: 0.1 });
     document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 });
+

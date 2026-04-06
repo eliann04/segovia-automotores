@@ -1,13 +1,13 @@
-// nav-mobile.js — Menú hamburguesa móvil
+﻿// nav-mobile.js â€” MenÃº hamburguesa mÃ³vil
 (function () {
     function initMobileNav() {
         const navContainer = document.querySelector('.nav-container');
         if (!navContainer) return;
 
-        // Crear botón hamburguesa
+        // Crear botÃ³n hamburguesa
         const btn = document.createElement('button');
         btn.className = 'nav-hamburger';
-        btn.setAttribute('aria-label', 'Abrir menú');
+        btn.setAttribute('aria-label', 'Abrir menÃº');
         btn.innerHTML = `
             <span class="ham-bar"></span>
             <span class="ham-bar"></span>
@@ -57,3 +57,4 @@
         initMobileNav();
     }
 })();
+
