@@ -87,4 +87,39 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.style.borderBottom = '1px solid var(--border-gray)';
         }
     });
+
+    // --- Carrusel deslizable con el dedo (solo mobile) ---
+    const carousel = document.getElementById('home-vehicles-carousel');
+    if (carousel && 'ontouchstart' in window) {
+        let startX = 0;
+        let startY = 0;
+        let scrollLeft = 0;
+        let isSwiping = false;
+
+        carousel.addEventListener('touchstart', (e) => {
+            startX     = e.touches[0].clientX;
+            startY     = e.touches[0].clientY;
+            scrollLeft = carousel.scrollLeft;
+            isSwiping  = false;
+        }, { passive: true });
+
+        carousel.addEventListener('touchmove', (e) => {
+            const dx = e.touches[0].clientX - startX;
+            const dy = e.touches[0].clientY - startY;
+
+            // Solo actuar si el gesto es más horizontal que vertical
+            if (!isSwiping && Math.abs(dx) > Math.abs(dy) + 5) {
+                isSwiping = true;
+            }
+
+            if (isSwiping) {
+                carousel.scrollLeft = scrollLeft - dx;
+            }
+        }, { passive: true });
+
+        carousel.addEventListener('touchend', () => {
+            isSwiping = false;
+        }, { passive: true });
+    }
+
 });
