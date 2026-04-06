@@ -210,11 +210,29 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // ─── Collapsible panels ──────────────────────────────
-    document.getElementById('toggleFilters')?.addEventListener('click', () => {
-        document.getElementById('panelFilters')?.classList.toggle('collapsed');
+    const panelFilters = document.getElementById('panelFilters');
+    const panelSort    = document.getElementById('panelSort');
+
+    document.getElementById('toggleFilters')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasCollapsed = panelFilters.classList.contains('collapsed');
+        // cierra el otro si estaba abierto
+        panelSort?.classList.add('collapsed');
+        panelFilters.classList.toggle('collapsed', !wasCollapsed);
     });
-    document.getElementById('toggleSort')?.addEventListener('click', () => {
-        document.getElementById('panelSort')?.classList.toggle('collapsed');
+
+    document.getElementById('toggleSort')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasCollapsed = panelSort.classList.contains('collapsed');
+        // cierra el otro si estaba abierto
+        panelFilters?.classList.add('collapsed');
+        panelSort.classList.toggle('collapsed', !wasCollapsed);
+    });
+
+    // Cerrar al hacer click fuera de los paneles
+    document.addEventListener('click', (e) => {
+        if (!panelFilters?.contains(e.target)) panelFilters?.classList.add('collapsed');
+        if (!panelSort?.contains(e.target))    panelSort?.classList.add('collapsed');
     });
 
     // ─── Navbar scroll effect ─────────────────────────────────

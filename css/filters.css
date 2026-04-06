@@ -11,22 +11,31 @@
 .filters-section {
     background-color: #080808;
     border-bottom: 1px solid var(--border-gray);
-    padding: 2rem 0;
+    padding: 0;
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+    overflow: visible; /* permite que los dropdowns salgan por abajo */
 }
 
 .filters-sort-wrapper {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    padding: 0.6rem 0;
+    position: relative;
 }
 
-/* ── Panel card (shared between filters & sort) ────────── */
+/* ── Panel card ─────────────────────────────────────────── */
+/* Siempre en el flujo normal — su altura nunca cambia */
 .panel-card {
     background-color: var(--card-charcoal);
     border: 1px solid var(--border-gray);
     border-radius: 10px;
-    overflow: hidden;
+    overflow: visible;  /* el dropdown sale por fuera del card */
     transition: border-color 0.3s var(--easing);
+    position: relative;
+    flex-shrink: 0;
 }
 
 .panel-card:hover {
@@ -85,25 +94,40 @@
 
 /* ── Filters panel (left) ──────────────────────────────── */
 .panel-filters {
-    flex: 1 1 380px;
-    min-width: 280px;
+    flex: 0 0 auto;
+    min-width: 200px;
 }
 
+/* ── Dropdown body (flota, nunca mueve el layout) ──────── */
 .panel-body {
-    padding: 0 1.25rem;
-    max-height: 0;
-    overflow: hidden;
+    /* Siempre absoluto — nunca ocupa espacio en el flujo */
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 480px;
+    background-color: var(--card-charcoal);
+    border: 1px solid var(--border-gray);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 1.25rem;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     align-items: flex-end;
     gap: 1rem;
-    transition: max-height 0.35s var(--easing), padding 0.35s var(--easing);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+    z-index: 300;
+    /* Animación: invisible → visible */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.25s var(--easing), transform 0.25s var(--easing);
 }
 
 .panel-card:not(.collapsed) .panel-body {
-    max-height: 200px;
-    padding: 1.25rem;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
 }
 
 .filter-group {
@@ -166,25 +190,41 @@
     border-radius: 6px;
 }
 
-/* ── Sort panel (right) ────────────────────────────────── */
+/* ── Sort panel (right) ─────────────────────────────────────────────────── */
 .panel-sort {
-    flex: 0 1 auto;
-    min-width: 220px;
+    flex: 0 0 auto;
+    min-width: 180px;
+    margin-left: auto; /* empuja el panel a la derecha del wrapper */
 }
 
+/* ── Dropdown sort (flota debajo de su header, alineado a la derecha) ───── */
 .sort-buttons {
-    padding: 0 1rem;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s var(--easing), padding 0.35s var(--easing);
+    position: absolute;
+    top: 100%;
+    right: 0;   /* alineado al borde derecho del panel-sort */
+    left: auto;
+    min-width: 200px;
+    background-color: var(--card-charcoal);
+    border: 1px solid var(--border-gray);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    padding: 0.75rem;
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.7);
+    z-index: 300;
+    /* Animación */
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.25s var(--easing), transform 0.25s var(--easing);
 }
 
 .panel-card:not(.collapsed) .sort-buttons {
-    max-height: 400px;
-    padding: 1rem;
+    opacity: 1;
+    pointer-events: all;
+    transform: translateY(0);
 }
 
 .sort-btn {
@@ -238,6 +278,7 @@
 @media (max-width: 768px) {
     .filters-sort-wrapper {
         flex-direction: column;
+        padding: 0.5rem 0;
     }
     .panel-filters,
     .panel-sort {
@@ -245,7 +286,30 @@
         min-width: unset;
         flex: none;
     }
+    /* En mobile los dropdowns vuelven al flujo normal */
+    .panel-body,
     .sort-buttons {
+        position: static;
+        opacity: 1;
+        pointer-events: all;
+        transform: none;
+        min-width: unset;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0 0 10px 10px;
+        /* Ocultar/mostrar con max-height en mobile */
+        max-height: 0;
+        overflow: hidden;
+        padding: 0;
+        transition: max-height 0.35s var(--easing), padding 0.35s var(--easing);
+    }
+    .panel-card:not(.collapsed) .panel-body {
+        max-height: 400px;
+        padding: 1.25rem;
+    }
+    .panel-card:not(.collapsed) .sort-buttons {
+        max-height: 400px;
+        padding: 0.75rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
     }

@@ -451,11 +451,54 @@ h4 {
     text-align: center;
 }
 
-/* --- Animations --- */
+/* ─── Scroll Animations ──────────────────────────────────── */
+/* Estado inicial compartido */
+[class*="anim-"] {
+    opacity: 0;
+    transition:
+        opacity 0.7s var(--easing),
+        transform 0.7s var(--easing);
+    transition-delay: var(--anim-delay, 0s);
+}
+
+/* Sube desde abajo */
+.anim-up,
 .fade-up {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s var(--easing), transform 0.6s var(--easing);
+    transform: translateY(40px);
+    transition: opacity 0.7s var(--easing), transform 0.7s var(--easing);
+    transition-delay: var(--anim-delay, 0s);
+}
+
+/* Entra desde la izquierda */
+.anim-left {
+    transform: translateX(-40px);
+}
+
+/* Entra desde la derecha */
+.anim-right {
+    transform: translateX(40px);
+}
+
+/* Escala desde tamaño menor */
+.anim-scale {
+    transform: scale(0.88);
+}
+
+/* Solo fade (sin movimiento) */
+.anim-fade {
+    transform: none;
+}
+
+/* Estado visible — activa la animación */
+.anim-up.visible,
+.anim-left.visible,
+.anim-right.visible,
+.anim-scale.visible,
+.anim-fade.visible,
+.fade-up.visible {
+    opacity: 1;
+    transform: none;
 }
 
 /* --- Buttons --- */
@@ -822,14 +865,11 @@ h4 {
 .reason-watermark {
     position: absolute;
     font-size: 15rem;
-    /* Huge text */
     font-weight: 900;
     color: var(--text-white);
-    opacity: 0.08;
-    /* Increased visibility */
+    opacity: 0.18;
     z-index: -1;
     top: 5%;
-    /* Pushed even higher up */
     transform: translateY(-50%);
     letter-spacing: -0.05em;
     user-select: none;
@@ -837,12 +877,9 @@ h4 {
 }
 
 .reason-item:hover .reason-watermark {
-    opacity: 0.15;
-    /* Make it pop significantly on hover */
+    opacity: 0.28;
     transform: translateY(-56%) scale(1.05);
-    /* Shift up and grow from true center */
     color: var(--primary-color);
-    /* Tint it with orange on hover */
 }
 
 .reason-item:not(.reason-item-reverse) .reason-watermark {
@@ -1322,12 +1359,7 @@ h4 {
     }
 
     .reason-watermark {
-        font-size: 10rem;
-        left: 50% !important;
-        right: auto !important;
-        top: 25% !important;
-        /* Move text to center with the box vertically in mobile */
-        transform: translate(-50%, -50%);
+        display: none;
     }
 
     /* ---- Carrusel deslizable con el dedo ---- */

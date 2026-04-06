@@ -56,25 +56,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Intersection Observer for scroll animations
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.15
-    };
+    // ─── Scroll Animations con stagger ───────────────────
+    const ANIM_SELECTOR = '.fade-up, .anim-up, .anim-left, .anim-right, .anim-scale, .anim-fade';
+    const STAGGER_PARENTS = '.catalog-grid, .home-carousel-container, .home-brands-grid, .reasons-grid, .footer-grid';
 
-    const observer = new IntersectionObserver((entries, observer) => {
+    // Aplica delay escalonado a los hijos directos de contenedores
+    document.querySelectorAll(STAGGER_PARENTS).forEach(parent => {
+        [...parent.children].forEach((child, i) => {
+            child.style.setProperty('--anim-delay', `${i * 0.08}s`);
+        });
+    });
+
+    const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Unobserve after animating once
-                observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    const animatedElements = document.querySelectorAll('.fade-up');
-    animatedElements.forEach(el => observer.observe(el));
+    document.querySelectorAll(ANIM_SELECTOR).forEach(el => observer.observe(el));
 
     // Navbar background blur on scroll adjustmenet (optional enhancement)
     const navbar = document.querySelector('.navbar');
