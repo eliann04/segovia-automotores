@@ -8,17 +8,17 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // ─── Logos conocidos de marcas (fallback) ─────────────────
     const BRAND_LOGOS = {
-        'toyota':      'img/toyota.png',
-        'volkswagen':  'img/volkswagen.png',
-        'vw':          'img/volkswagen.png',
-        'fiat':        'img/fiat.png',
-        'renault':     'img/renault.png',
-        'peugeot':     'img/logo-Peugeot.png',
-        'ford':        'img/ford.png',
-        'chevrolet':   'img/chevrolet.png',
-        'citroën':     'img/citroen.png',
-        'citroen':     'img/citroen.png',
-        'jeep':        'img/jeep.png',
+        'toyota':      'img/toyota2.png',
+        'volkswagen':  'img/volkswagen2.png',
+        'vw':          'img/volkswagen2.png',
+        'fiat':        'img/fiat2.png',
+        'renault':     'img/renault2.png',
+        'peugeot':     'img/peugeot2.png',
+        'ford':        'img/ford2.png',
+        'chevrolet':   'img/chevrolet2.png',
+        'citroën':     'img/citroen2.png',
+        'citroen':     'img/citroen2.png',
+        'jeep':        'img/jeep2.png',
     };
 
     function getLogoForBrand(brandName) {

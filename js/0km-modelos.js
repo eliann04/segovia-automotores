@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         'vw': 'img/volkswagen2.png', 'fiat': 'img/fiat2.png',
         'renault': 'img/renault2.png', 'peugeot': 'img/peugeot2.png',
         'ford': 'img/ford2.png', 'chevrolet': 'img/chevrolet2.png',
-        'citroÃ«n': 'img/citroen2.png', 'citroen': 'img/citroen2.png',
+        'citroën': 'img/citroen2.png', 'citroen': 'img/citroen2.png',
         'jeep': 'img/jeep2.png',
     };
 
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             const imgSrc    = vehicle.imagen || 'img/catalog1.png';
             const nombre    = vehicle.nombre || `${vehicle.marca} ${vehicle.año || ''}`.trim();
             const wspMsg    = encodeURIComponent(
-                `Hola! Me interesa consultar el 0km: ${nombre}${vehicle.año ? ` (${vehicle.año})` : ''}. Â¿Podrían darme más información?`
+                `Hola! Me interesa consultar el 0km: ${nombre}${vehicle.año ? ` (${vehicle.año})` : ''}. ¿Podrían darme más información?`
             );
             const waLink    = `https://wa.me/5492235409018?text=${wspMsg}`;
 
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </div>
                         <a href="${waLink}" target="_blank" class="btn btn-outline"
                            style="width:100%;text-align:center;">
-                            ðŸ’¬ Consultar por WhatsApp
+                            💬 Consultar por WhatsApp
                         </a>
                     </div>
                 </div>`);

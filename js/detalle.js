@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         e.preventDefault();
         const precioText = car.precio ? formatPrice(car.precio) : 'a consultar';
         const msg = encodeURIComponent(
-            `Hola! Me interesa el ${nombre}${car.año ? ` (${car.año})` : ''}. Precio publicado: ${precioText}. Â¿Podría darme más información?`
+            `Hola! Me interesa el ${nombre}${car.año ? ` (${car.año})` : ''}. Precio publicado: ${precioText}. ¿Podría darme más información?`
         );
         window.open(`https://wa.me/5492235409018?text=${msg}`, '_blank');
     });
