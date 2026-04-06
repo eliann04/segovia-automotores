@@ -70,12 +70,13 @@ document.addEventListener('DOMContentLoaded', async () => {
                         </a>`;
                 };
 
-                // ── Con menos de 4 autos: mostrar estático, sin duplicar ──
-                if (usados.length < 4) {
+                // ── Con menos de 4 autos o en MÓVIL: estático, sin duplicar ──
+                const isMobile = 'ontouchstart' in window;
+                if (usados.length < 4 || isMobile) {
                     usados.forEach(car => carouselContainer.insertAdjacentHTML('beforeend', buildCard(car)));
-                    // Sin auto-scroll cuando hay pocos autos
+                    // Sin auto-scroll en mobile ni cuando hay pocos autos
                 } else {
-                    // ── Con 4 o más: carrusel infinito con copias ─────────
+                    // ── Desktop con 4 o más: carrusel infinito con copias ─────────
                     const COPIES = Math.max(8, Math.ceil(20 / usados.length));
                     for (let i = 0; i < COPIES; i++) {
                         usados.forEach(car => carouselContainer.insertAdjacentHTML('beforeend', buildCard(car)));
@@ -87,8 +88,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     carouselContainer.addEventListener('mouseenter', () => isHovered = true);
                     carouselContainer.addEventListener('mouseleave', () => isHovered = false);
-                    carouselContainer.addEventListener('touchstart', () => isHovered = true, { passive: true });
-                    carouselContainer.addEventListener('touchend',   () => isHovered = false);
 
                     function autoScroll() {
                         if (!setWidth && carouselContainer.scrollWidth > 0) {
