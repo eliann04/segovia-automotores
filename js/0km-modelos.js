@@ -1,5 +1,5 @@
 // =============================================================
-//  0km-modelos.js â€” Modelos por marca  |  Fuente: Airtable
+//  0km-modelos.js — Modelos por marca  |  Fuente: Airtable
 // =============================================================
 document.addEventListener('DOMContentLoaded', async () => {
 
@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const modelsGrid   = document.getElementById('models-grid');
     const noResultsMsg = document.getElementById('noResultsMsg');
 
-    // â”€â”€â”€ TÃ­tulos iniciales â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // â”€â”€â”€ Títulos iniciales â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
     document.title = `${selectedBrand} 0km - Segovia Automotores`;
     document.getElementById('bc-brand-name').textContent = selectedBrand;
     const pageTitle = document.getElementById('page-title');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         noResultsMsg.style.display = 'block';
         noResultsMsg.innerHTML = `
             <div class="airtable-error">
-                <div class="airtable-error-icon">âš ï¸</div>
+                <div class="airtable-error-icon">⚠ </div>
                 <h3>No se pudieron cargar los modelos</h3>
                 <p>Hubo un problema al conectar con la base de datos.</p>
                 <button class="btn btn-outline" onclick="location.reload()">Reintentar</button>
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
         brandModels.forEach(vehicle => {
             const imgSrc    = vehicle.imagen || 'img/catalog1.png';
-            const nombre    = vehicle.nombre || `${vehicle.marca} ${vehicle.aÃ±o || ''}`.trim();
+            const nombre    = vehicle.nombre || `${vehicle.marca} ${vehicle.año || ''}`.trim();
             const wspMsg    = encodeURIComponent(
-                `Hola! Me interesa consultar el 0km: ${nombre}${vehicle.aÃ±o ? ` (${vehicle.aÃ±o})` : ''}. Â¿PodrÃ­an darme mÃ¡s informaciÃ³n?`
+                `Hola! Me interesa consultar el 0km: ${nombre}${vehicle.año ? ` (${vehicle.año})` : ''}. Â¿Podrían darme más información?`
             );
             const waLink    = `https://wa.me/5492235409018?text=${wspMsg}`;
 
@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <div>
                             <h3 style="font-size:1.4rem;margin-bottom:.5rem;">${nombre}</h3>
                             <div class="card-tags" style="margin-bottom:1.5rem;">
-                                ${vehicle.aÃ±o ? `<span class="tag">AÃ±o ${vehicle.aÃ±o}</span>` : ''}
+                                ${vehicle.año ? `<span class="tag">Año ${vehicle.año}</span>` : ''}
                                 ${vehicle.motor ? `<span class="tag">${vehicle.motor}</span>` : ''}
                                 ${vehicle.transmision ? `<span class="tag">${vehicle.transmision}</span>` : ''}
                             </div>

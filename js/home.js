@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const delay = (index * 0.08).toFixed(2);
 
                     brandsGridContainer.insertAdjacentHTML('beforeend', `
-                        <a href="0km-modelos.html?brand=${encodeURIComponent(brandName)}"
+                        <a href="0km-modelos?brand=${encodeURIComponent(brandName)}"
                            class="home-brand-card fade-up visible"
                            style="transition-delay:${delay}s">
                             <div class="home-brand-logo">
