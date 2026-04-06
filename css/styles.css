@@ -325,8 +325,13 @@ h4 {
 }
 
 @keyframes slide-card-bg {
-    0% { background-position: 0 0, 0 0; }
-    100% { background-position: 40px 40px, 0 0; }
+    0% {
+        background-position: 0 0, 0 0;
+    }
+
+    100% {
+        background-position: 40px 40px, 0 0;
+    }
 }
 
 .home-car-info {
@@ -334,14 +339,12 @@ h4 {
     display: flex;
     flex-direction: column;
     position: relative;
-    background: 
-        repeating-linear-gradient(
-            -45deg,
+    background:
+        repeating-linear-gradient(-45deg,
             rgba(255, 255, 255, 0.03) 0,
             rgba(255, 255, 255, 0.03) 1px,
             transparent 1px,
-            transparent 50%
-        ),
+            transparent 50%),
         linear-gradient(135deg, #181818 0%, #0a0a0a 100%);
     background-size: 40px 40px, 100% 100%;
     animation: slide-card-bg 3s linear infinite;
@@ -417,24 +420,55 @@ h4 {
 }
 
 .home-brand-logo {
-    width: 85px;
-    height: 85px;
+    width: 165px;
+    height: 165px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .home-brand-logo img {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    transform: scale(1.15); /* Agrandar todos por defecto */
     transition: transform 0.4s var(--easing);
 }
 
 .home-brand-card:hover .home-brand-logo img {
     transition-delay: 0s !important;
-    transform: scale(1.1);
+    transform: scale(1.25);
+}
+
+/* Fiat: compensación (el borde plateado lo hace más grande en el archivo) */
+img[src*="fiat2.png"] {
+    transform: scale(0.95);
+}
+.home-brand-card:hover img[src*="fiat2.png"] {
+    transform: scale(1.05);
+}
+
+/* Renault, Volkswagen: aumentar un poco más (aprox 20% extra sobre la base) */
+img[src*="renault2.png"],
+img[src*="volkswagen2.png"] {
+    transform: scale(1.35);
+}
+.home-brand-card:hover img[src*="renault2.png"],
+.home-brand-card:hover img[src*="volkswagen2.png"] {
+    transform: scale(1.45);
+}
+
+/* Citroen, Peugeot, Toyota: aumentar aún más porque se ven más chicos */
+img[src*="citroen2.png"],
+img[src*="peugeot2.png"],
+img[src*="toyota2.png"] {
+    transform: scale(1.45);
+}
+.home-brand-card:hover img[src*="citroen2.png"],
+.home-brand-card:hover img[src*="peugeot2.png"],
+.home-brand-card:hover img[src*="toyota2.png"] {
+    transform: scale(1.55);
 }
 
 .home-brand-card span {
@@ -641,14 +675,12 @@ h4 {
     flex-direction: column;
     gap: 0.6rem;
     position: relative;
-    background: 
-        repeating-linear-gradient(
-            -45deg,
+    background:
+        repeating-linear-gradient(-45deg,
             rgba(255, 255, 255, 0.03) 0,
             rgba(255, 255, 255, 0.03) 1px,
             transparent 1px,
-            transparent 50%
-        ),
+            transparent 50%),
         linear-gradient(135deg, #181818 0%, #0a0a0a 100%);
     background-size: 40px 40px, 100% 100%;
     animation: slide-card-bg 3s linear infinite;
@@ -1364,14 +1396,17 @@ h4 {
 
     /* ---- Carrusel deslizable con el dedo ---- */
     .home-carousel-container {
-        -webkit-overflow-scrolling: touch;  /* inercia en iOS */
-        scroll-snap-type: x proximity;      /* snapping suave, sin forzar */
+        -webkit-overflow-scrolling: touch;
+        /* inercia en iOS */
+        scroll-snap-type: x proximity;
+        /* snapping suave, sin forzar */
         padding-bottom: 0.5rem;
     }
 
     .home-car-card {
         scroll-snap-align: start;
-        min-width: 75vw;                    /* se ve parte de la siguiente tarjeta */
+        min-width: 75vw;
+        /* se ve parte de la siguiente tarjeta */
     }
 }
 
@@ -1404,9 +1439,17 @@ h4 {
 }
 
 /* X animation when open */
-.nav-hamburger.open .ham-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.nav-hamburger.open .ham-bar:nth-child(2) { opacity: 0; }
-.nav-hamburger.open .ham-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-hamburger.open .ham-bar:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.nav-hamburger.open .ham-bar:nth-child(2) {
+    opacity: 0;
+}
+
+.nav-hamburger.open .ham-bar:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
 
 /* Drawer */
 .nav-drawer {
@@ -1415,7 +1458,7 @@ h4 {
     right: -100%;
     width: min(280px, 80vw);
     height: 100%;
-    background: rgba(10,10,10,0.97);
+    background: rgba(10, 10, 10, 0.97);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     border-left: 1px solid var(--border-gray);
@@ -1448,14 +1491,14 @@ h4 {
 .nav-drawer a:hover,
 .nav-drawer a.active {
     color: var(--text-white);
-    background-color: rgba(255,255,255,0.05);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 /* Overlay */
 .nav-mobile-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     backdrop-filter: blur(2px);
     z-index: 1040;
     opacity: 0;

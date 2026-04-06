@@ -65,17 +65,48 @@
 }
 
 .card-complex-bg-logo {
-    max-width: 150px;
-    max-height: 150px;
+    max-width: 210px;
+    max-height: 210px;
     object-fit: contain;
     opacity: 0.25;
+    transform: scale(1.15); /* Agrandar todos por defecto */
     transition: transform 0.3s var(--easing), opacity 0.3s var(--easing);
 }
 
 .brand-card-complex:hover .card-complex-bg-logo {
     transition-delay: 0s !important;
     opacity: 0.45;
-    transform: scale(1.1);
+    transform: scale(1.25);
+}
+
+/* Compensación de tamaño para el logo de Fiat */
+img.card-complex-bg-logo[src*="fiat2.png"] {
+    transform: scale(0.95);
+}
+.brand-card-complex:hover img.card-complex-bg-logo[src*="fiat2.png"] {
+    transform: scale(1.05);
+}
+
+/* Renault, Volkswagen: aumentar un poco más (aprox 20% extra) */
+img.card-complex-bg-logo[src*="renault2.png"],
+img.card-complex-bg-logo[src*="volkswagen2.png"] {
+    transform: scale(1.35);
+}
+.brand-card-complex:hover img.card-complex-bg-logo[src*="renault2.png"],
+.brand-card-complex:hover img.card-complex-bg-logo[src*="volkswagen2.png"] {
+    transform: scale(1.45);
+}
+
+/* Citroen, Peugeot, Toyota: aumentar aún más porque se ven más chicos */
+img.card-complex-bg-logo[src*="citroen2.png"],
+img.card-complex-bg-logo[src*="peugeot2.png"],
+img.card-complex-bg-logo[src*="toyota2.png"] {
+    transform: scale(1.45);
+}
+.brand-card-complex:hover img.card-complex-bg-logo[src*="citroen2.png"],
+.brand-card-complex:hover img.card-complex-bg-logo[src*="peugeot2.png"],
+.brand-card-complex:hover img.card-complex-bg-logo[src*="toyota2.png"] {
+    transform: scale(1.55);
 }
 
 .card-complex-name-overlay {

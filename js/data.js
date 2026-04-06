@@ -1,4 +1,4 @@
-﻿// Este archivo contiene el inventario de vehÃ­culos.
+// Este archivo contiene el inventario de vehÃ­culos.
 // El cliente puede modificar este archivo para agregar, quitar o actualizar los autos.
 // AsegÃºrate de que las imÃ¡genes estÃ©n guardadas en la carpeta 'img'.
 
@@ -85,47 +85,47 @@ const CAR_INVENTORY = [
 const BRANDS_0KM = [
     {
         name: "Toyota",
-        logo: "img/toyota.png",
+        logo: "img/toyota2.png",
         accentColor: "#eb0a1e"
     },
     {
         name: "Volkswagen",
-        logo: "img/volkswagen.png",
+        logo: "img/volkswagen2.png",
         accentColor: "#00b0f0"
     },
     {
         name: "Fiat",
-        logo: "img/fiat.png",
+        logo: "img/fiat2.png",
         accentColor: "#941711"
     },
     {
         name: "Renault",
-        logo: "img/renault.png",
+        logo: "img/renault2.png",
         accentColor: "#ffcc33"
     },
     {
         name: "Peugeot",
-        logo: "img/logo-Peugeot.png",
+        logo: "img/peugeot2.png",
         accentColor: "#262626"
     },
     {
         name: "Ford",
-        logo: "img/ford.png",
+        logo: "img/ford2.png",
         accentColor: "#003478"
     },
     {
         name: "Chevrolet",
-        logo: "img/chevrolet.png",
+        logo: "img/chevrolet2.png",
         accentColor: "#ceac5d"
     },
     {
         name: "CitroÃ«n",
-        logo: "img/citroen.png",
+        logo: "img/citroen2.png",
         accentColor: "#626367"
     },
     {
         name: "Jeep",
-        logo: "img/jeep.png",
+        logo: "img/jeep2.png",
         accentColor: "#1e3120"
     }
 ];
