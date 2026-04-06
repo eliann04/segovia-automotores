@@ -1,6 +1,6 @@
-// Este archivo contiene el inventario de vehÃ­culos.
+// Este archivo contiene el inventario de vehículos.
 // El cliente puede modificar este archivo para agregar, quitar o actualizar los autos.
-// AsegÃºrate de que las imÃ¡genes estÃ©n guardadas en la carpeta 'img'.
+// Asegúrate de que las imágenes estén guardadas en la carpeta 'img'.
 
 const CAR_INVENTORY = [
     {
@@ -12,12 +12,12 @@ const CAR_INVENTORY = [
         kilometers: "65.000 km",
         image: "img/catalog1.png",
         motor: "2.0L Turbo",
-        transmision: "AutomÃ¡tica",
+        transmision: "Automática",
         combustible: "Nafta",
         puertas: 4,
-        bodytype: "SedÃ¡n",
+        bodytype: "Sedán",
         featured: true,
-        description: "Excelente estado, Ãºnico dueÃ±o. Mantenimientos al dÃ­a en concesionario oficial.",
+        description: "Excelente estado, único dueño. Mantenimientos al día en concesionario oficial.",
         images: ["img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png", "img/catalog1.png"]
     },
     {

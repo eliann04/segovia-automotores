@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     const marca  = car.marca  || '';
                     const km     = car.kilometraje || '';
                     return `
-                        <a href="vehiculo-detalle.html?id=${car.id}" class="home-car-card">
+                        <a href="vehiculo-detalle?id=${car.id}" class="home-car-card">
                             <div class="home-car-img-wrapper">
                                 <img src="${img}" alt="${nombre}" loading="lazy"
                                      onerror="this.src='img/catalog1.png'">

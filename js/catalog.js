@@ -106,7 +106,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             catalogGrid.insertAdjacentHTML('beforeend', `
                 <div class="car-card fade-up visible">
-                    <a href="vehiculo-detalle.html?id=${car.id}" class="card-img-wrapper" style="display:block;position:relative;">
+                    <a href="vehiculo-detalle?id=${car.id}" class="card-img-wrapper" style="display:block;position:relative;">
                         <img src="${imgSrc}" alt="${nombre}" loading="lazy"
                              onerror="this.src='img/catalog1.png'">
                         <div class="img-overlay">
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                             <span class="tag">${kmText}</span>
                             <span class="tag">${transText}</span>
                         </div>
-                        <a href="vehiculo-detalle.html?id=${car.id}" class="btn btn-outline btn-ver-detalles">
+                        <a href="vehiculo-detalle?id=${car.id}" class="btn btn-outline btn-ver-detalles">
                             Ver detalles
                         </a>
                     </div>
