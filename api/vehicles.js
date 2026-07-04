@@ -27,6 +27,7 @@ module.exports = async function handler(req, res) {
         do {
             const url = new URL(baseUrl);
             url.searchParams.set('pageSize', '100');
+            url.searchParams.set('filterByFormula', '{Publicado} = 1');
             if (offset) url.searchParams.set('offset', offset);
 
             const response = await fetch(url.toString(), { headers });
@@ -56,6 +57,7 @@ module.exports = async function handler(req, res) {
 
             const fotosRaw = f['Fotos'] || f['fotos'] || f['Imágenes'] || f['Imagenes'] || [];
             const fotos = Array.isArray(fotosRaw) ? fotosRaw.map(att => att.url) : [];
+            const fotosLargeThumb = Array.isArray(fotosRaw) ? fotosRaw.map(att => att.thumbnails?.large?.url || att.url) : [];
 
             const descRaw = f['Descripción Web'] || f['Descripcion Web'] || f['descripcion'] || '';
             const descripcion = (typeof descRaw === 'object' && descRaw !== null)
@@ -82,8 +84,9 @@ module.exports = async function handler(req, res) {
                 puertas:     f['Puertas']      || '',
                 publicado:   true,
                 inicio:      f['Inicio'] === true,
-                imagen:      fotos[0]          || '',
+                imagen:      fotosLargeThumb[0] || '',
                 fotos,
+                fotosLargeThumb,
             };
         });
 

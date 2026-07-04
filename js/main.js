@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const cardHTML = `
                 <div class="car-card fade-up">
                     <div class="card-img-wrapper">
-                        <img src="${car.image}" alt="${car.make} ${car.model}">
+                        <img src="${car.image}" alt="${car.make} ${car.model}" loading="lazy">
                     </div>
                     <div class="card-info">
                         <h3>${car.make} ${car.model}</h3>

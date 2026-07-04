@@ -1,4 +1,4 @@
-﻿// =============================================================
+// =============================================================
 //  detalle.js — Detalle de vehículo  |  Fuente: Airtable
 // =============================================================
 document.addEventListener('DOMContentLoaded', async () => {
@@ -44,12 +44,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
-    // â”€â”€â”€ Datos normalizados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // —————————————————————————————————————————————————————————————
     const nombre   = car.nombre   || `${car.marca} ${car.año || ''}`.trim();
     const subtitle = [car.marca, car.año].filter(Boolean).join(' · ');
     const images   = car.fotos.length ? car.fotos : ['img/catalog1.png'];
+    const thumbsImages = car.fotosLargeThumb && car.fotosLargeThumb.length ? car.fotosLargeThumb : images;
 
-    // â”€â”€â”€ Poblar DOM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // —————————————————————————————————————————————————————————————
     document.title = `${nombre} - Segovia Automotores`;
     document.getElementById('bc-bodytype').textContent = car.marca || 'Vehículo';
 
@@ -67,7 +68,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('car-description').textContent = car.descripcion || 'Sin descripción disponible.';
 
-    // â”€â”€â”€ Carrusel de fotos â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+    // —————————————————————————————————————————————————————————————
     let currentIdx   = 0;
     const mainImg    = document.getElementById('main-image');
     const counter    = document.getElementById('image-counter');
@@ -81,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 
-    images.forEach((src, i) => {
+    thumbsImages.forEach((src, i) => {
         const thumb = document.createElement('div');
         thumb.className = `thumb-wrapper ${i === 0 ? 'active' : ''}`;
         thumb.innerHTML = `<img src="${src}" alt="Foto ${i + 1}" loading="lazy" onerror="this.src='img/catalog1.png'">`;
