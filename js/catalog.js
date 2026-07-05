@@ -98,7 +98,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         noResultsMsg.style.display = 'none';
 
         cars.forEach(car => {
-            const imgSrc     = car.imagen || 'img/catalog1.png';
+            const imgSrc = (car.imagen && typeof car.imagen === 'object'
+                ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
+                : car.imagen) || 'img/catalog1.png';
             const nombre     = car.nombre || `${car.marca} ${car.año || ''}`.trim();
             const precioText = car.precio ? formatPrice(car.precio) : '';
             const kmText     = car.kilometraje || '—';

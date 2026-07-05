@@ -79,7 +79,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         noResultsMsg.style.display = 'none';
 
         brandModels.forEach(vehicle => {
-            const imgSrc    = vehicle.imagen || 'img/catalog1.png';
+            const imgSrc = (vehicle.imagen && typeof vehicle.imagen === 'object'
+                ? (vehicle.imagen.thumbnails?.large?.url || vehicle.imagen.url)
+                : vehicle.imagen) || 'img/catalog1.png';
             const nombre    = vehicle.nombre || `${vehicle.marca} ${vehicle.año || ''}`.trim();
             const wspMsg    = encodeURIComponent(
                 `Hola! Me interesa consultar el 0km: ${nombre}${vehicle.año ? ` (${vehicle.año})` : ''}. ¿Podrían darme más información?`

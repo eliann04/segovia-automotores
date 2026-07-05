@@ -55,9 +55,7 @@ module.exports = async function handler(req, res) {
         .map(rec => {
             const f = rec.fields;
 
-            const fotosRaw = f['Fotos'] || f['fotos'] || f['Imágenes'] || f['Imagenes'] || [];
-            const fotos = Array.isArray(fotosRaw) ? fotosRaw.map(att => att.url) : [];
-            const fotosLargeThumb = Array.isArray(fotosRaw) ? fotosRaw.map(att => att.thumbnails?.large?.url || att.url) : [];
+            const fotos = f['Fotos'] || f['fotos'] || f['Imágenes'] || f['Imagenes'] || [];
 
             const descRaw = f['Descripción Web'] || f['Descripcion Web'] || f['descripcion'] || '';
             const descripcion = (typeof descRaw === 'object' && descRaw !== null)
@@ -84,9 +82,8 @@ module.exports = async function handler(req, res) {
                 puertas:     f['Puertas']      || '',
                 publicado:   true,
                 inicio:      f['Inicio'] === true,
-                imagen:      fotosLargeThumb[0] || '',
+                imagen:      fotos[0] || null,
                 fotos,
-                fotosLargeThumb,
             };
         });
 

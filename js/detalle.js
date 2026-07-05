@@ -47,8 +47,26 @@ document.addEventListener('DOMContentLoaded', async () => {
     // —————————————————————————————————————————————————————————————
     const nombre   = car.nombre   || `${car.marca} ${car.año || ''}`.trim();
     const subtitle = [car.marca, car.año].filter(Boolean).join(' · ');
-    const images   = car.fotos.length ? car.fotos : ['img/catalog1.png'];
-    const thumbsImages = car.fotosLargeThumb && car.fotosLargeThumb.length ? car.fotosLargeThumb : images;
+
+    const getImageUrl = (item) => {
+        if (!item) return 'img/catalog1.png';
+        if (typeof item === 'string') return item;
+        return item.url || 'img/catalog1.png';
+    };
+
+    const getThumbUrl = (item) => {
+        if (!item) return 'img/catalog1.png';
+        if (typeof item === 'string') return item;
+        return item.thumbnails?.large?.url || item.url || 'img/catalog1.png';
+    };
+
+    const images = car.fotos && car.fotos.length
+        ? car.fotos.map(getImageUrl)
+        : ['img/catalog1.png'];
+
+    const thumbsImages = car.fotos && car.fotos.length
+        ? car.fotos.map(getThumbUrl)
+        : images;
 
     // —————————————————————————————————————————————————————————————
     document.title = `${nombre} - Segovia Automotores`;

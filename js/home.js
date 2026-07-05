@@ -40,7 +40,9 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             if (usados.length) {
                 const buildCard = (car) => {
-                    const img    = car.imagen || 'img/catalog1.png';
+                    const img = (car.imagen && typeof car.imagen === 'object'
+                        ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
+                        : car.imagen) || 'img/catalog1.png';
                     const nombre = car.nombre || `${car.marca} ${car.año || ''}`.trim();
                     const marca  = car.marca  || '';
                     const km     = car.kilometraje || '';
