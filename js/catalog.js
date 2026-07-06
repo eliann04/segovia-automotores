@@ -113,7 +113,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                 <div class="car-card fade-up visible">
                     <a href="vehiculo-detalle?id=${car.id}" class="card-img-wrapper" style="display:block;position:relative;">
                         <img src="${imgSrc}" alt="${nombre}" ${lazyAttr}
-                             onerror="this.src='img/catalog1.png'">
+                             onload="this.classList.add('loaded')"
+                             onerror="this.src='img/catalog1.png'; this.classList.add('loaded');">
                         <div class="img-overlay">
                             <span class="view-more-content">
                                 <div class="overlay-icon-circle">

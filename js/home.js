@@ -51,8 +51,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                     return `
                         <a href="vehiculo-detalle?id=${car.id}" class="home-car-card">
                             <div class="home-car-img-wrapper">
-                                <img src="${img}" alt="${nombre}" ${lazyAttr}
-                                     onerror="this.src='img/catalog1.png'">
+                                 <img src="${img}" alt="${nombre}" ${lazyAttr}
+                                      onload="this.classList.add('loaded')"
+                                      onerror="this.src='img/catalog1.png'; this.classList.add('loaded');">
                                 <div class="img-overlay">
                                     <span class="view-more-content">
                                         <div class="overlay-icon-circle">

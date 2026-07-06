@@ -93,7 +93,8 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="brand-accent-line" style="background-color:#fff;width:40px;border-radius:0 0 4px 0;"></div>
                     <div class="card-img-wrapper">
                         <img src="${imgSrc}" alt="${nombre}" loading="lazy"
-                             onerror="this.src='img/catalog1.png'">
+                             onload="this.classList.add('loaded')"
+                             onerror="this.src='img/catalog1.png'; this.classList.add('loaded');">
                     </div>
                     <div class="card-info" style="gap:.5rem;justify-content:space-between;">
                         <div>
