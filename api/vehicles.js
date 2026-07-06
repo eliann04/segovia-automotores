@@ -87,8 +87,8 @@ module.exports = async function handler(req, res) {
             };
         });
 
-    // Cache de 5 minutos en Vercel Edge
-    res.setHeader('Cache-Control', 's-maxage=300, stale-while-revalidate');
+    // Cache de 5 minutos en Vercel Edge, sin caché local en el navegador para evitar URLs expiradas de Airtable
+    res.setHeader('Cache-Control', 'public, max-age=0, s-maxage=300, stale-while-revalidate=60');
     res.setHeader('Access-Control-Allow-Origin', '*');
     return res.status(200).json(vehicles);
 };
