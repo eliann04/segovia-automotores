@@ -1215,7 +1215,7 @@ img[src*="toyota2.png"] {
 /* --- Footer --- */
 .footer {
     border-top: 1px solid var(--border-gray);
-    padding: 6rem 0 3rem;
+    padding: 4rem 0 1.5rem;
 }
 
 .footer-grid {

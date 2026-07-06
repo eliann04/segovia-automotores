@@ -203,7 +203,6 @@
     position: absolute;
     top: 100%;
     right: 0;   /* alineado al borde derecho del panel-sort */
-    left: auto;
     min-width: 200px;
     background-color: var(--card-charcoal);
     border: 1px solid var(--border-gray);
