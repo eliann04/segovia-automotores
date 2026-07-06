@@ -35,9 +35,13 @@
     border: 1px solid var(--border-gray);
     border-radius: 10px;
     overflow: visible;  /* el dropdown sale por fuera del card */
-    transition: border-color 0.3s var(--easing);
+    transition: border-color 0.3s var(--easing), border-radius 0.3s var(--easing);
     position: relative;
     flex-shrink: 0;
+}
+
+.panel-card:not(.collapsed) {
+    border-radius: 10px 10px 0 0;
 }
 
 .panel-card:hover {
@@ -202,8 +206,8 @@
 .sort-buttons {
     position: absolute;
     top: 100%;
-    right: 0;   /* alineado al borde derecho del panel-sort */
-    min-width: 200px;
+    left: -1px;
+    right: -1px;
     background-color: var(--card-charcoal);
     border: 1px solid var(--border-gray);
     border-top: none;

@@ -1215,14 +1215,14 @@ img[src*="toyota2.png"] {
 /* --- Footer --- */
 .footer {
     border-top: 1px solid var(--border-gray);
-    padding: 4rem 0 1.5rem;
+    padding: 3rem 0 1rem;
 }
 
 .footer-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 4rem;
-    margin-bottom: 2rem;
+    margin-bottom: 0;
 }
 
 @media (min-width: 768px) {
