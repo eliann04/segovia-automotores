@@ -97,7 +97,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         catalogGrid.style.display = 'grid';
         noResultsMsg.style.display = 'none';
 
-        cars.forEach(car => {
+        cars.forEach((car, index) => {
             const imgSrc = (car.imagen && typeof car.imagen === 'object'
                 ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
                 : car.imagen) || 'img/catalog1.png';
@@ -106,10 +106,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const kmText     = car.kilometraje || '—';
             const transText  = car.transmision || '—';
 
+            const isPriority = index < 3;
+            const lazyAttr = isPriority ? 'fetchpriority="high"' : 'loading="lazy"';
+
             catalogGrid.insertAdjacentHTML('beforeend', `
                 <div class="car-card fade-up visible">
                     <a href="vehiculo-detalle?id=${car.id}" class="card-img-wrapper" style="display:block;position:relative;">
-                        <img src="${imgSrc}" alt="${nombre}" loading="lazy"
+                        <img src="${imgSrc}" alt="${nombre}" ${lazyAttr}
                              onerror="this.src='img/catalog1.png'">
                         <div class="img-overlay">
                             <span class="view-more-content">

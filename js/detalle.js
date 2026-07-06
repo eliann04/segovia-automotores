@@ -61,6 +61,10 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const images = car.fotos && car.fotos.length
+        ? car.fotos.map(getThumbUrl)
+        : ['img/catalog1.png'];
+
+    const fullImages = car.fotos && car.fotos.length
         ? car.fotos.map(getImageUrl)
         : ['img/catalog1.png'];
 
@@ -92,12 +96,28 @@ document.addEventListener('DOMContentLoaded', async () => {
     const counter    = document.getElementById('image-counter');
     const thumbRow   = document.getElementById('thumbnail-row');
 
+    // --- Preload system ---
+    const preloadedUrls = new Set();
+    function preloadImage(url) {
+        if (url && !preloadedUrls.has(url)) {
+            const img = new Image();
+            img.src = url;
+            preloadedUrls.add(url);
+        }
+    }
+
     function updateGallery() {
         mainImg.src = images[currentIdx];
         counter.textContent = `${currentIdx + 1}/${images.length}`;
         document.querySelectorAll('.thumb-wrapper').forEach((el, i) => {
             el.classList.toggle('active', i === currentIdx);
         });
+
+        // Preload next image in background
+        if (images.length > 1) {
+            const nextIdx = (currentIdx + 1) % images.length;
+            preloadImage(images[nextIdx]);
+        }
     }
 
     thumbsImages.forEach((src, i) => {
@@ -140,11 +160,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     let isZoomed = false;
 
     function updateLightbox() {
-        lbImg.src = images[currentIdx];
-        lbCounter.textContent = `${currentIdx + 1}/${images.length}`;
+        lbImg.src = fullImages[currentIdx];
+        lbCounter.textContent = `${currentIdx + 1}/${fullImages.length}`;
         isZoomed = false;
         lbImg.classList.remove('zoomed');
         lbImg.style.transformOrigin = 'center center';
+
+        // Preload next full image in background
+        if (fullImages.length > 1) {
+            const nextIdx = (currentIdx + 1) % fullImages.length;
+            preloadImage(fullImages[nextIdx]);
+        }
     }
 
     mainImg.addEventListener('click', () => {
