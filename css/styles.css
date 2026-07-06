@@ -1253,18 +1253,10 @@ img[src*="toyota2.png"] {
 }
 
 .footer-logo-img {
-    height: 280px;
-    /* Increased 200px */
+    height: 120px;
     width: auto;
-    margin-top: -60px;
-    /* Pull the logo up */
-    margin-bottom: -40px;
-    /* Pull the text below it up */
-    transform: scale(1.5);
-    /* Scaled down slightly since base is huge now */
-    transform-origin: left center;
+    margin-bottom: 1.5rem;
     pointer-events: none;
-    /* Prevents the scaled image from blocking clicks on the icons below */
 }
 
 .social-circles {
