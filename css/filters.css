@@ -10,17 +10,19 @@
 /* ── Filters + Sort two-panel wrapper ─────────────────── */
 .filters-section {
     background-color: #080808;
-    border-bottom: 1px solid var(--border-gray);
+    border-bottom: none;
     padding: 0;
     position: sticky;
     top: 80px;
     z-index: 100;
     overflow: visible; /* permite que los dropdowns salgan por abajo */
+    margin-bottom: 24px;
 }
 
 .filters-sort-wrapper {
     display: flex;
-    gap: 1.5rem;
+    justify-content: flex-end;
+    gap: 20px;
     align-items: flex-start;
     padding: 0.6rem 0;
     position: relative;
@@ -194,7 +196,6 @@
 .panel-sort {
     flex: 0 0 auto;
     min-width: 180px;
-    margin-left: auto; /* empuja el panel a la derecha del wrapper */
 }
 
 /* ── Dropdown sort (flota debajo de su header, alineado a la derecha) ───── */
