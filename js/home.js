@@ -39,17 +39,19 @@ document.addEventListener('DOMContentLoaded', async () => {
             : vehicles.filter(v => v.tipo === 'usado');
 
             if (usados.length) {
-                const buildCard = (car) => {
+                const buildCard = (car, index) => {
                     const img = (car.imagen && typeof car.imagen === 'object'
                         ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
                         : car.imagen) || 'img/catalog1.png';
                     const nombre = car.nombre || `${car.marca} ${car.año || ''}`.trim();
                     const marca  = car.marca  || '';
                     const km     = car.kilometraje || '';
+                    const isLazy = index >= 4;
+                    const lazyAttr = isLazy ? 'loading="lazy"' : '';
                     return `
                         <a href="vehiculo-detalle?id=${car.id}" class="home-car-card">
                             <div class="home-car-img-wrapper">
-                                <img src="${img}" alt="${nombre}" loading="lazy"
+                                <img src="${img}" alt="${nombre}" ${lazyAttr}
                                      onerror="this.src='img/catalog1.png'">
                                 <div class="img-overlay">
                                     <span class="view-more-content">
@@ -75,13 +77,16 @@ document.addEventListener('DOMContentLoaded', async () => {
                 // ── Con menos de 4 autos o en MÓVIL: estático, sin duplicar ──
                 const isMobile = 'ontouchstart' in window;
                 if (usados.length < 4 || isMobile) {
-                    usados.forEach(car => carouselContainer.insertAdjacentHTML('beforeend', buildCard(car)));
+                    usados.forEach((car, idx) => carouselContainer.insertAdjacentHTML('beforeend', buildCard(car, idx)));
                     // Sin auto-scroll en mobile ni cuando hay pocos autos
                 } else {
                     // ── Desktop con 4 o más: carrusel infinito con copias ─────────
-                    const COPIES = Math.max(8, Math.ceil(20 / usados.length));
-                    for (let i = 0; i < COPIES; i++) {
-                        usados.forEach(car => carouselContainer.insertAdjacentHTML('beforeend', buildCard(car)));
+                    const COPIES_VAL = Math.max(8, Math.ceil(20 / usados.length));
+                    for (let i = 0; i < COPIES_VAL; i++) {
+                        usados.forEach((car, idx) => {
+                            const absoluteIndex = i === 0 ? idx : 4;
+                            carouselContainer.insertAdjacentHTML('beforeend', buildCard(car, absoluteIndex));
+                        });
                     }
 
                     let setWidth  = 0;
@@ -91,9 +96,15 @@ document.addEventListener('DOMContentLoaded', async () => {
                     carouselContainer.addEventListener('mouseenter', () => isHovered = true);
                     carouselContainer.addEventListener('mouseleave', () => isHovered = false);
 
+                    // Recalcular el ancho si cambia la ventana o se cargan imágenes
+                    window.addEventListener('resize', () => { setWidth = 0; });
+                    carouselContainer.querySelectorAll('img').forEach(img => {
+                        img.addEventListener('load', () => { setWidth = 0; });
+                    });
+
                     function autoScroll() {
                         if (!setWidth && carouselContainer.scrollWidth > 0) {
-                            setWidth = carouselContainer.scrollWidth / COPIES;
+                            setWidth = carouselContainer.scrollWidth / COPIES_VAL;
                         }
                         if (!isHovered && setWidth) {
                             scrollPos += 0.9;
