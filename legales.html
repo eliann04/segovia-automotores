@@ -4,17 +4,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventario - Segovia Automotores</title>
+    <title>Aspectos Legales - Segovia Automotores</title>
     <link rel="icon" type="image/png" href="img/logo.png">
     <!-- Google Fonts: Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/filters.css">
+    <style>
+        .legal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+        .legal-title {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-white);
+        }
+        .legal-section {
+            margin-bottom: 2rem;
+            background: var(--card-charcoal);
+            border: 1px solid var(--border-gray);
+            border-radius: 12px;
+            padding: 2.2rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+        .legal-section:hover {
+            border-color: var(--border-hover);
+            transform: translateY(-2px);
+        }
+        .legal-section h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1.2rem;
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .legal-section p {
+            color: var(--text-muted);
+            line-height: 1.75;
+            font-size: 0.98rem;
+            margin: 0;
+        }
+    </style>
 </head>
 
-<body class="page-vehiculos">
+<body class="page-legales">
 
     <!-- Sticky Header -->
     <header class="navbar">
@@ -24,7 +67,7 @@
             </div>
             <nav class="nav-links">
                 <a href="/">Inicio</a>
-                <a href="vehiculos" class="active">Usados</a>
+                <a href="vehiculos">Usados</a>
                 <a href="0km">0km</a>
                 <a href="nosotros">Nosotros</a>
                 <a href="contacto">Contacto</a>
@@ -41,111 +84,55 @@
     <div class="nav-mobile-overlay" id="navOverlay"></div>
     <!-- Mobile drawer -->
     <nav class="nav-drawer" id="navDrawer">
-        <a href="index.html">Inicio</a>
-        <a href="vehiculos.html" class="active">Usados</a>
-        <a href="0km.html">0km</a>
+        <a href="/">Inicio</a>
+        <a href="vehiculos">Usados</a>
+        <a href="0km">0km</a>
         <a href="nosotros">Nosotros</a>
-        <a href="contacto.html">Contacto</a>
+        <a href="contacto">Contacto</a>
     </nav>
 
-    <!-- Header Interno -->
+    <!-- Header Interno / Hero -->
     <section class="internal-header fade-up"
-        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('img/header-bg.jpg'); background-size: cover; background-position: center 55%; border-bottom: 1px solid var(--border-gray); padding-top: 120px; min-height: 350px; display: flex; align-items: center;">
+        style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)), url('img/header-bg.jpg'); background-size: cover; background-position: center 55%; border-bottom: 1px solid var(--border-gray); padding-top: 120px; min-height: 250px; display: flex; align-items: center;">
         <div class="container"
             style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
-            <div class="location-badge" style="margin-bottom: 1rem;">Usados</div>
-            <h1 class="large-text" style="margin-bottom: 0;">Encontrá el vehículo ideal para vos</h1>
+            <div class="location-badge" style="margin-bottom: 1rem;">Segovia Automotores</div>
+            <h1 class="large-text" style="margin-bottom: 0; max-width: 800px; text-align: center;">Información Legal</h1>
         </div>
     </section>
 
-    <!-- Filters & Sort Section -->
-    <section class="filters-section fade-up">
-        <div class="container">
-            <div class="filters-sort-wrapper">
-
-                <!-- Panel izquierdo: Filtros -->
-                <div class="panel-card panel-filters collapsed" id="panelFilters">
-                    <div class="panel-header" id="toggleFilters">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon></svg>
-                        <span>Filtros</span>
-                        <svg class="panel-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </div>
-                    <div class="panel-body">
-                        <div class="filter-group">
-                            <label for="filterMake">Marca</label>
-                            <select id="filterMake" class="filter-select">
-                                <option value="all">Todas las marcas</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="filterYear">Año</label>
-                            <select id="filterYear" class="filter-select">
-                                <option value="all">Todos los años</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label for="filterMaxPrice">Precio máximo (USD)</label>
-                            <input type="number" id="filterMaxPrice" class="filter-input" placeholder="Ej: 50000">
-                        </div>
-                        <div class="filter-actions-row">
-                            <button id="btnApplyFilters" class="btn btn-solid btn-filter">Filtrar</button>
-                            <button id="btnResetFilters" class="btn btn-outline btn-filter">Limpiar</button>
-                        </div>
-                    </div>
+    <!-- Content Section -->
+    <main style="background-color: var(--bg-black); min-height: 50vh;">
+        <div class="container fade-up">
+            <div class="legal-content">
+                <div class="legal-header">
+                    <h2 class="legal-title">Términos y Condiciones Generales</h2>
+                    <p class="muted-text">Políticas generales, exclusión de responsabilidad y privacidad de datos.</p>
                 </div>
 
-                <!-- Panel derecho: Ordenar -->
-                <div class="panel-card panel-sort collapsed" id="panelSort">
-                    <div class="panel-header" id="toggleSort">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
-                        <span>Ordenar por</span>
-                        <svg class="panel-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-                    </div>
-                    <div class="sort-buttons">
-                        <button class="sort-btn active" data-sort="name-asc">
-                            <span class="sort-icon">A→Z</span>
-                            <span class="sort-label">Nombre A→Z</span>
-                        </button>
-                        <button class="sort-btn" data-sort="name-desc">
-                            <span class="sort-icon">Z→A</span>
-                            <span class="sort-label">Nombre Z→A</span>
-                        </button>
-                        <button class="sort-btn" data-sort="price-desc">
-                            <span class="sort-icon">↓USD</span>
-                            <span class="sort-label">Mayor precio</span>
-                        </button>
-                        <button class="sort-btn" data-sort="price-asc">
-                            <span class="sort-icon">↑USD</span>
-                            <span class="sort-label">Menor precio</span>
-                        </button>
-                        <button class="sort-btn" data-sort="year-desc">
-                            <span class="sort-icon">↓</span>
-                            <span class="sort-label">Año más nuevo</span>
-                        </button>
-                        <button class="sort-btn" data-sort="year-asc">
-                            <span class="sort-icon">↑</span>
-                            <span class="sort-label">Año más antiguo</span>
-                        </button>
-                    </div>
+                <div class="legal-section">
+                    <h2>1. Carácter Informativo del Sitio</h2>
+                    <p>Todo el contenido, precios, especificaciones técnicas, kilometrajes y disponibilidad de los vehículos publicados en este sitio web provienen de bases de datos y se exhiben con fines puramente informativos y orientativos. Segovia Automotores se reserva el derecho de modificar, actualizar o suprimir dicha información sin previo aviso.</p>
                 </div>
 
+                <div class="legal-section">
+                    <h2>2. Exclusión de Responsabilidad por Errores</h2>
+                    <p>En caso de que exista un error involuntario de tipeo o actualización en los precios o datos de un vehículo, el valor real será el rectificado de forma presencial por los asesores. La visualización de un precio erróneo no genera una obligación de venta por parte de la empresa. Las operaciones comerciales se concretan exclusivamente en nuestro salón de ventas en Mar del Plata.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>3. Política de Privacidad (Ley 25.326)</h2>
+                    <p>De conformidad con la legislación argentina vigente, los datos de contacto enviados por los usuarios a través de formularios o enlaces de WhatsApp son de carácter confidencial. Serán utilizados únicamente con fines de asesoramiento comercial y atención al cliente, garantizando que no serán transferidos a terceros sin autorización.</p>
+                </div>
+
+                <div class="legal-section">
+                    <h2>4. Propiedad Intelectual</h2>
+                    <p>El diseño de la marca, logotipos, imágenes locales y elementos de esta web son propiedad exclusiva de Segovia Automotores. Queda prohibida su reproducción total o parcial sin consentimiento expreso.</p>
+                </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Catalog Section -->
-    <section id="stock" class="catalog section-padding" style="padding-top: 2rem;">
-        <div class="container">
-            <div id="noResultsMsg" class="no-results" style="display: none;">
-                <p class="large-text">No se encontraron vehículos que coincidan con tu búsqueda.</p>
-            </div>
-            <div class="catalog-grid" id="catalogGrid">
-                <!-- Cars will be injected here by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer / Contact -->
     <!-- Footer -->
     <footer class="footer section-padding">
         <div class="container fade-up">
@@ -230,8 +217,6 @@
         </div>
     </footer>
 
-    <script src="js/airtable.js"></script>
-    <script src="js/catalog.js"></script>
     <script src="js/main.js"></script>
 </body>
 

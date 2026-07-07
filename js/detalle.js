@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     const formatPrice = price =>
         new Intl.NumberFormat('en-US', {
-            style: 'currency', currency: 'USD', maximumFractionDigits: 0
+            style: 'currency', currency: 'USD', currencyDisplay: 'code', maximumFractionDigits: 0
         }).format(price);
 
     // â”€â”€â”€ Mostrar loading placeholder â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
