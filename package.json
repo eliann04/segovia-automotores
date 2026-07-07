@@ -1,0 +1,27 @@
+{
+  "name": "segovia-automotores",
+  "version": "1.0.0",
+  "description": "Segovia Automotores - Concesionaria Multimarca en Mar del Plata",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eliann04/segovia-automotores.git"
+  },
+  "keywords": [
+    "automotores",
+    "concesionaria",
+    "mar-del-plata"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/eliann04/segovia-automotores/issues"
+  },
+  "homepage": "https://github.com/eliann04/segovia-automotores#readme",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
