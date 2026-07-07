@@ -76,6 +76,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.title = `${nombre} - Segovia Automotores`;
     document.getElementById('bc-bodytype').textContent = car.marca || 'Vehículo';
 
+    const precioText = car.precio ? formatPrice(car.precio) : 'A consultar';
+    const priceDetailBadgeEl = document.getElementById('car-price-detail');
+    if (priceDetailBadgeEl) {
+        priceDetailBadgeEl.textContent = precioText;
+    }
+
     document.getElementById('car-title').textContent        = nombre;
     document.getElementById('mobile-car-title').textContent = nombre;
     document.getElementById('mobile-car-title').style.display = 'block';
