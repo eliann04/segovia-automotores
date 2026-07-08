@@ -90,4 +90,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Ocultar URL en la barra de estado del navegador al pasar el mouse ---
+    document.addEventListener('mouseover', (e) => {
+        const a = e.target.closest('a');
+        if (a && a.getAttribute('href')) {
+            const href = a.getAttribute('href');
+            if (href && !href.startsWith('javascript:') && !href.startsWith('#')) {
+                a.setAttribute('data-href', href);
+                a.removeAttribute('href');
+                a.setAttribute('tabindex', '0');
+                a.style.cursor = 'pointer';
+            }
+        }
+    });
+
+    document.addEventListener('mousedown', (e) => {
+        const a = e.target.closest('a');
+        if (a && a.getAttribute('data-href')) {
+            const href = a.getAttribute('data-href');
+            a.setAttribute('href', href);
+        }
+    });
+
+    document.addEventListener('click', (e) => {
+        const a = e.target.closest('a');
+        if (a && a.getAttribute('data-href')) {
+            const href = a.getAttribute('data-href');
+            
+            // Restore href momentarily so standard navigation works, then clean up
+            a.setAttribute('href', href);
+            setTimeout(() => {
+                if (a.getAttribute('href') === href) {
+                    a.removeAttribute('href');
+                }
+            }, 100);
+        }
+    });
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+            const a = e.target.closest('a');
+            if (a && a.getAttribute('data-href')) {
+                const href = a.getAttribute('data-href');
+                const target = a.getAttribute('target');
+                if (target === '_blank') {
+                    window.open(href, '_blank');
+                } else {
+                    window.location.href = href;
+                }
+                e.preventDefault();
+            }
+        }
+    });
+
 });
