@@ -84,6 +84,74 @@ document.addEventListener('DOMContentLoaded', async () => {
             </div>`;
     }
 
+    // ─── Optimizador de Imágenes Vercel ───────────────────────
+    function getOptimizedImageUrl(rawUrl, width = 640, quality = 75) {
+        if (!rawUrl) return 'img/catalog1.png';
+        if (rawUrl.startsWith('img/') || rawUrl.startsWith('/') || rawUrl.startsWith('data:')) {
+            return rawUrl;
+        }
+        return `/_vercel/image?url=${encodeURIComponent(rawUrl)}&w=${width}&q=${quality}`;
+    }
+
+    // ─── JSON-LD ItemList Schema ──────────────────────────────
+    function updateVehiclesJsonLd(cars) {
+        let scriptTag = document.getElementById('jsonLdVehicles');
+        if (!scriptTag) {
+            scriptTag = document.createElement('script');
+            scriptTag.id = 'jsonLdVehicles';
+            scriptTag.type = 'application/ld+json';
+            document.head.appendChild(scriptTag);
+        }
+
+        const itemListElement = cars.map((car, idx) => {
+            const rawImgSrc = (car.imagen && typeof car.imagen === 'object'
+                ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
+                : car.imagen) || 'https://www.segoviaautomotores.com.ar/img/catalog1.png';
+            const fullImgUrl = rawImgSrc.startsWith('http')
+                ? rawImgSrc
+                : `https://www.segoviaautomotores.com.ar/${rawImgSrc.replace(/^\//, '')}`;
+
+            const nombre = car.nombre || `${car.marca} ${car.año || ''}`.trim();
+            const item = {
+                "@type": "Car",
+                "name": nombre,
+                "image": fullImgUrl,
+                "brand": {
+                    "@type": "Brand",
+                    "name": car.marca || "Segovia Automotores"
+                },
+                "url": `https://www.segoviaautomotores.com.ar/vehiculo-detalle?id=${car.id}`
+            };
+
+            if (car.año) item.modelDate = String(car.año);
+            if (car.precio) {
+                item.offers = {
+                    "@type": "Offer",
+                    "price": String(car.precio),
+                    "priceCurrency": "USD",
+                    "availability": "https://schema.org/InStock"
+                };
+            }
+
+            return {
+                "@type": "ListItem",
+                "position": idx + 1,
+                "item": item
+            };
+        });
+
+        const jsonLdData = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            "name": "Catálogo de Vehículos Usados | Segovia Automotores",
+            "url": "https://www.segoviaautomotores.com.ar/vehiculos",
+            "numberOfItems": cars.length,
+            "itemListElement": itemListElement
+        };
+
+        scriptTag.textContent = JSON.stringify(jsonLdData, null, 2);
+    }
+
     // ─── Render cards ─────────────────────────────────────────
     function renderCars(cars) {
         catalogGrid.innerHTML = '';
@@ -91,30 +159,32 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!cars.length) {
             catalogGrid.style.display = 'none';
             noResultsMsg.style.display = 'block';
+            updateVehiclesJsonLd([]);
             return;
         }
 
         catalogGrid.style.display = 'grid';
         noResultsMsg.style.display = 'none';
 
-        cars.forEach((car, index) => {
-            const imgSrc = (car.imagen && typeof car.imagen === 'object'
+        // Actualizar schema.org ItemList dinámicamente
+        updateVehiclesJsonLd(cars);
+
+        cars.forEach((car) => {
+            const rawImgSrc = (car.imagen && typeof car.imagen === 'object'
                 ? (car.imagen.thumbnails?.large?.url || car.imagen.url)
                 : car.imagen) || 'img/catalog1.png';
+            const optimizedImgSrc = getOptimizedImageUrl(rawImgSrc);
             const nombre     = car.nombre || `${car.marca} ${car.año || ''}`.trim();
             const precioText = car.precio ? formatPrice(car.precio) : '';
             const kmText     = car.kilometraje || '—';
             const transText  = car.transmision || '—';
 
-            const isPriority = index < 3;
-            const lazyAttr = isPriority ? 'fetchpriority="high"' : 'loading="lazy"';
-
             catalogGrid.insertAdjacentHTML('beforeend', `
                 <div class="car-card fade-up visible">
                     <a href="vehiculo-detalle?id=${car.id}" class="card-img-wrapper" style="display:block;position:relative;">
-                        <img src="${imgSrc}" alt="${nombre}" ${lazyAttr}
+                        <img src="${optimizedImgSrc}" alt="${nombre}" loading="lazy" decoding="async"
                              onload="this.classList.add('loaded')"
-                             onerror="this.src='img/catalog1.png'; this.classList.add('loaded');">
+                             onerror="if(!this.dataset.fallback){this.dataset.fallback='1';this.src='${rawImgSrc}';}else{this.src='img/catalog1.png';} this.classList.add('loaded');">
                         <div class="img-overlay">
                             <span class="view-more-content">
                                 <div class="overlay-icon-circle">
